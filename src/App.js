@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react"
+import MyButton from "./components/MyButton/MyButton"
+import MyButtonClass from "./components/MyButton/MyButtonClass";
+import Clock from "./components/Clock";
+import Counter from "./components/Counterrr";
 
-function App() {
+const buttonArray=['success','primary','grey','red','yellow']
+
+const App=() => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <Clock/>
+      {buttonArray.map((btn)=>
+          <MyButton key={btn} className={btn}>
+              {btn}
+          </MyButton>
+      )}
+      
+      <MyButton className={'primary'}>
+        I am primary button
+      </MyButton>
+   
+      
+      <MyButtonClass>+</MyButtonClass>
+      <MyButtonClass>-</MyButtonClass>
+
+        <Counter/>
     </div>
   );
 }
