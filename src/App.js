@@ -1,19 +1,26 @@
 import React, { useState } from "react"
 import NavBar from "./components/NavBar"
+import UserList from "./components/UserList"; 
 
 
 const App=() => {
   const [showFormUser, setShowFormUser]=useState(false);
   const [users, setUsers]=useState([
     {
+      id:1,
       name:'John',
       phone:'7788'
     },
     {
+      id:2,
       name:'Thanos',
       phone:'50%'
     },
-    
+    {
+      id:3,
+      name:'Borisn',
+      phone:'284223'
+    },
   ]);
   const [user, setUser]=useState(
     {
@@ -30,12 +37,21 @@ const App=() => {
   }
 
   const addUser=()=>{
+    const id = Math.random()*1
+    setUser({...user,id:id})
     setUsers([...users,user]);
-    setUser({
-      name:'',
-      phone:'',
-    });
   }
+
+  const removeUser = (id) =>{
+    const confirm = window.confirm("Реально удалить?")
+    if (confirm) setUsers(users.filter((user)=>user.id !== id))
+  };
+
+  const clear = () =>{
+    setUser({name:'',phone:''})
+
+  }
+
 console.log(user);
   return (
    <div className="App">
@@ -65,29 +81,14 @@ console.log(user);
         <div className="input-field col s6">
           <i className="material-icons prefix">phone</i>
           <input id="phone" type="tel" class="validate" placeholder="EnterPhone" onChange={onChange}/>
-          <a className="waves-effect waves-light right btn m-1">Cancel</a>
+          <a className="waves-effect waves-light right btn m-1"
+              onClick={()=>clear()}
+          >Cancel</a>
         </div>
         </>}
       </div>
     </div>
-    <table>
-    <thead>
-      <tr>
-          <th>Name</th>
-          <th>Phone</th>
-          <th>Delete</th>
-      </tr>
-    </thead>
-
-    <tbody>
-     { users&& users.map((user)=><tr>
-        <td>{user.name}</td>
-        <td>{user.phone}</td>
-        <td>DELETE</td>
-      </tr>
-      )}
-    </tbody>
-  </table>
+   <UserList search deleteUser = {removeUser}>{users}</UserList>
         
   </div> </div>
   );
