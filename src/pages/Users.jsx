@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import UserList from "../components/UserList"; 
-
+import MyModal from "../components/MyModal/MyModal"; 
 
 const Users=() => {
   const [showFormUser, setShowFormUser]=useState(false);
@@ -57,6 +57,7 @@ console.log(user);
     
   
     <div className="container">
+      <MyModel visible={swowModal} setVisible={setShowModal}>Hi</MyModel>
     <div className="row m-1">
       <div className="col s4">
         <a className="waves-effect waves-light btn"
